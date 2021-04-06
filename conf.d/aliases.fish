@@ -28,8 +28,10 @@ end
 
 # Editing stuff
 
-alias v $EDITOR
-alias sv 'sudo '$EDITOR
+if test -n "$EDITOR"
+    alias v $EDITOR
+    alias sv 'sudo '$EDITOR
+end
 
 # General tools
 
