@@ -47,15 +47,17 @@ alias unpack 'aunpack -x'
 alias cbi 'xclip -sel clip -i'
 alias cbo 'xclip -sel clip -o'
 
+alias noansi 'sed "s/\x1b\[[^m]*m//g"'
+
 function mywatch
 	while true
 		clear
 		date
-		echo "Command: '"$argv"'"
+		echo "Command: '"$argv[2..]"'"
 		printf '%*s\n' $COLUMNS '' | tr ' ' -
-		eval $argv
+		eval $argv[2..]
 		printf '%*s\n' $COLUMNS '' | tr ' ' -
-		sleep 1
+		sleep $argv[1]
 	end
 end
 
@@ -95,7 +97,7 @@ function it
 end
 
 function eosr
-	eopkg sr $argv | grep -v "devel" | grep -v "dbginfo" || true
+	eopkg sr $argv | grep -v "\-devel" | grep -v "\-dbginfo" || true
 end
 
 function sr
