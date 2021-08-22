@@ -49,6 +49,8 @@ set -g tide_context_default_color FD5
 set -g tide_pwd_bg_color 6AF
 set -g tide_pwd_color_dirs 555
 set -g tide_pwd_color_anchors 555
+set -g tide_pwd_color_truncated_dirs 666
+set -g tide_pwd_truncate_margin 64
 
 set -g tide_git_bg_color BF5
 set -g tide_git_branch_color 555
