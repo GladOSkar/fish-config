@@ -28,6 +28,9 @@ end
 
 # Editing stuff
 
+set -x PAGER (which most > /dev/null && echo most; or echo less)
+set -x EDITOR (which nvim > /dev/null && echo nvim; or which vim > /dev/null && echo vim; or echo nano)
+
 if test -n "$EDITOR"
     alias v $EDITOR
     alias sv 'sudo '$EDITOR
