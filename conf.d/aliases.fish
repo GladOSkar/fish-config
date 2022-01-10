@@ -9,7 +9,10 @@ alias ll $LISTER' -l'
 alias la $LISTER' -la'
 
 function cd
-	set OLDPWD $PWD
+	set -x OLDPWD $PWD
+	if test "$argv" = "-"
+		set argv $OLDPWD
+	end
 	builtin cd $argv
 	eval $LISTER
 end
@@ -66,7 +69,7 @@ end
 
 # Special tools
 
-alias clock 'mywatch "date +%T | figlet | cowsay -n | lolcat"'
+alias clock 'mywatch 1 "date +%T | figlet | cowsay -n | lolcat"'
 alias dirt 'watch grep -e "Dirty" -e "Writeback" /proc/meminfo'
 
 function codelines
@@ -77,21 +80,9 @@ function burn
 	sudo dd if=$argv[1] of=$argv[2] status=progress conv=fsync
 end
 
-function dunst-pause
-	notify-send 'Pausing dunst'
-	notify-send DUNST_COMMAND_PAUSE
-	notify-send 'Dunst paused'
-end
-
-function dunst-resume
-	notify-send 'Resuming dunst'
-	notify-send DUNST_COMMAND_RESUME
-	notify-send 'Dunst resumed'
-end
-
 # Package management
 
-function up
+function upd
 	which eopkg > /dev/null && sudo eopkg up $argv; or which apt > /dev/null && sudo apt update && sudo apt upgrade $argv; or echo "no packet manager found"
 end
 
@@ -109,8 +100,8 @@ end
 
 # ssh
 
-alias mal-tunnel 'ssh -L 8080:192.168.177.254:80 -L 8090:192.168.177.253:80 -L 9080:192.168.71.254:80 -L 9090:192.168.71.253:80 -L 8443:192.168.177.1:443 mal-office'
-alias ft-tunnel 'ssh -L 8080:192.168.13.1:80 -L 8090:192.168.13.254:80 -L 8022:192.168.13.2:22 fasttube'
+alias mal-tunnel 'ssh -L 11254:192.168.11.254:443 -L 11253:192.168.11.253:443 -L 11252:192.168.11.252:443 -L 1111:192.168.11.1:443 mal-office'
+alias ft-tunnel 'ssh -L 8080:192.168.13.1:80 -L 8090:192.168.13.254:80 -L 8006:192.168.13.4:8006 -L 8022:192.168.13.2:22 fasttube'
 
 # git
 
