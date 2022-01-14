@@ -5,7 +5,7 @@ if test $TERM != "xterm-kitty"
 end
 
 # load ssh agent info
-source ~/.ssh/ssh-agent-vars.fish
+source ~/.ssh/ssh-agent-vars.fish > /dev/null
 
 # load gpg agent
 set -x GPG_TTY (tty)
